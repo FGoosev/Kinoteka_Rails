@@ -1,0 +1,20 @@
+<% provide :page_title, "New movie" %>
+<% currently_at 'New movie' %>
+<div class="container">
+  <h1 class="mb-4">New movie</h1>
+
+  <%= form_with model: @movie do |f| %>
+    <div class="mb-3 row">
+      <div class="col-sm-10">
+        <%= f.text_field :title, class: 'form-control', placeholder: "Title" %>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <div class="col-sm-10">
+        <%= f.text_area :body, class: 'form-control', placeholder: "Text" %>
+      </div>
+    </div>
+
+    <%= f.submit "Задать вопрос", class: 'btn btn-primary'%>
+  <% end %>
+</div>

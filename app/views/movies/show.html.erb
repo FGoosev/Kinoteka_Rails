@@ -1,0 +1,42 @@
+<% provide :page_title, "№#{@movie.id}" %>
+<% currently_at %>
+<div class="container">
+  <h2 class="mb-4"><%=@movie.title %></h2>
+  <p class="lead my-3"><%=@movie.body %></p>
+  <% if admin_signed_in? && current_admin.id == 1 %>
+    <%= link_to "Редактировать", edit_movie_path(@movie),class: 'btn btn-secondary' %>
+    <%= link_to "Удалить", movie_path(@movie), class: 'btn btn-danger', data: {method: :delete, confirm: "Уверены?"} %>
+  <% end %>
+
+  <hr class="my-3">
+
+  <% @ratings.each do |f| %>
+    <% if f.body != nil %>
+      <div class="alert alert-dark">
+        <div class="row">
+          <div class="row">
+            <p><%= f.body %></p>
+          </div>
+          <div class="row">
+            <p>Оценка: <%= f.rate %></p>
+          </div>
+        </div>
+        <% if admin_signed_in? && current_admin.id == 1 %>
+           <%= link_to 'Delete', movie_rating_path(@movie, f), class: 'btn btn-danger btn-sm', data: {method: :delete, confirm: 'Are you sure?'} %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <h3>Write your answer!</h3>
+  <%= form_with model: [@movie,@rating] do |a| %>
+    <div class="mb-3 mt-3 row">
+      <div class="col-sm-10 mb-2">
+        <%= a.text_area :body, class: 'form-control' %>
+      </div>
+      <div class="col-sm-10 ">
+        <%= a.text_area :rate, class: 'form-control' %>
+      </div>
+    </div>
+    <%= a.submit "Add answer", class: 'btn btn-primary' %>
+  <% end %>
+</div>

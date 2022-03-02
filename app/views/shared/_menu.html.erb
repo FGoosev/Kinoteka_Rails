@@ -1,0 +1,24 @@
+<% provide :main_menu do %>
+  <header class="p-3 bg-dark text-white">
+    <div class="container">
+      <nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><%= nav_tab 'Main', root_path,
+                          class: 'nav-link px-2', current_page: current_page %> </li>
+          <% if admin_signed_in?%>
+            <li><%= nav_tab 'New movie', new_movie_path,
+                          class: 'nav-link px-2', current_page: current_page %> </li>
+            <li><%= nav_tab 'Log out', destroy_admin_session_path,
+                            class: 'nav-link px-2', current_page: current_page, data: {method: :delete, confirm: "Уверены?"} %> </li>
+          <% else %>
+            <li><%= nav_tab 'Create admin', new_admin_registration_path,
+                            class: 'nav-link px-2', current_page: current_page %> </li>
+            <li><%= nav_tab 'Log in admin', new_admin_session_path,
+                            class: 'nav-link px-2', current_page: current_page %> </li>
+
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </header>
+<% end %>

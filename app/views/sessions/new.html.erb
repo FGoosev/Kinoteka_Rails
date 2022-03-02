@@ -1,0 +1,27 @@
+<% provide :page_title, "Authentication" %>
+<% currently_at 'Log in' %>
+
+<main class="cont">
+  <%= form_with url: session_path do |f| %>
+    <h1 class="h3 mb-3 fw-normal">Log in</h1>
+    <%= render 'shared/errors', object: @user %>
+
+    <div class="form-floating">
+      <%= f.email_field :email, class: 'form-control', placeholder: "Email" %>
+      <label for="floatingInput">Email</label>
+    </div>
+
+    <div class="form-floating">
+      <%= f.password_field :password, class: 'form-control', placeholder: "Password" %>
+      <label for="floatingPassword">Password</label>
+    </div>
+
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <%= f.submit "Authenticate", class: 'btn btn-primary'%>
+  <% end %>
+</main>
